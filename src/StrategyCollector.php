@@ -27,7 +27,7 @@ class StrategyCollector extends MetadataCollector
     public static function register(array $handler, StrategyType $type, string $scope = ''): void
     {
         try {
-            $parameters = Reflect::reflectMethod(...$handler)->getParameters();
+            $parameters = Reflection::reflectMethod(...$handler)->getParameters();
         } catch (ReflectionException) {
             $parameters = [];
         }
