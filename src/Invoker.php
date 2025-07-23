@@ -7,9 +7,28 @@ namespace XHyperf\Invoker;
 use Hyperf\Context\ApplicationContext;
 
 use function Hyperf\Collection\data_get;
+use function Hyperf\Collection\value;
 
 class Invoker
 {
+    /**
+     * 策略调用
+     * @param StrategyType|null $type    策略类型枚举
+     * @param array             $args    参数
+     * @param mixed|null        $default 默认值，策略执行方法不存在时返回
+     * @param string            $scope   作用域，用于区分同一策略类型枚举在不同场景下的调用
+     * @param bool              $strict  是否严格模式，为true时，空参数都会使用默认值
+     * @return mixed
+     */
+    public static function strategy(?StrategyType $type, array $args = [], mixed $default = null, string $scope = '', bool $strict = false): mixed
+    {
+        if (! $handler = StrategyCollector::getHandler($type, $scope)) {
+            return value($default, $args);
+        }
+
+        return static::reflect($handler[0], $args, $handler[1], $strict);
+    }
+
     /**
      * 自动适配参数的反射调用
      * @param array $callable callable 调用数组
