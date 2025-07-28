@@ -29,7 +29,7 @@ trait StrategyTypeTrait
      */
     public function name(): string
     {
-        return match (true) {
+        return (string)match (true) {
             $this instanceof BackedEnum => $this->value,
             $this instanceof UnitEnum => $this->name,
             default => throw new StrategyException('This trait must in enum'),
