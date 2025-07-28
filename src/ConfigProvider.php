@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace XHyperf\Invoker;
 
+use XHyperf\Invoker\Listener\ImplRegister;
+
 class ConfigProvider
 {
     public function __invoke(): array
@@ -12,6 +14,7 @@ class ConfigProvider
             'dependencies' => [
             ],
             'listeners'    => [
+                ImplRegister::class,
             ],
             'annotations'  => [
                 'scan' => [
