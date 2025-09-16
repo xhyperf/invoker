@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace XHyperf\Invoker;
 
-use Hyperf\Collection\Arr;
 use Hyperf\Di\MetadataCollector;
-use XHyperf\Invoker\Annotation\Mapper;
 use ReflectionAttribute;
 use ReflectionException;
+use XHyperf\Invoker\Annotation\Mapper;
 
 /**
  * 策略收集器
@@ -80,7 +79,7 @@ class StrategyCollector extends MetadataCollector
 
         [$namespace, $type] = self::getType($type, $scope);
 
-        return Arr::get(static::$container, $namespace . '.' . $type);
+        return static::$container[$namespace][$type] ?? null;
     }
 
     /**
