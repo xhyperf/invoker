@@ -35,4 +35,15 @@ trait StrategyTypeTrait
             default => throw new StrategyException('This trait must in enum'),
         };
     }
+
+    /**
+     * 用于MQ消息的 payload
+     * @return array
+     */
+    public function payload(): array
+    {
+        return [
+            'strategy' => $this,
+        ];
+    }
 }
