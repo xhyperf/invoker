@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace XHyperf\Invoker;
 
+use BackedEnum;
 use UnitEnum;
 
 /**
  * 策略类型接口
+ * @mixin BackedEnum
  */
 interface StrategyType extends UnitEnum
 {
